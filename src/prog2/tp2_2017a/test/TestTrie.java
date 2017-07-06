@@ -41,7 +41,7 @@ public class TestTrie
 			libros.agregar("9785423113601", "El amor en los tiempos del c�lera");
 
 			assertEquals("El amor de tu vida", libros.obtener("9788490093795"));
-			System.out.println(libros.toString());
+
 			busq = libros.busqueda("9785");
 			assertEquals(2, busq.size());
 			assertTrue(busq.contains("Cien a�os de soledad"));

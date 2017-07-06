@@ -99,23 +99,49 @@ public class TrieChar<V> {
 	/**
 	 * Verifica que el trie pasado por parametro sea igual
 	 * 
-	 * @param Trie
+	 * @param Obj  a comparar
 	 * @return true = si es igual, false = si no es igual
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public boolean equals(Object obj) {
-		if(obj == null || this == null) 
-			return obj == null && this == null;// si ambos so
-		TrieChar<V> t2 = (TrieChar<V>) obj; // daunwarning, perono
-											// sepuedehacernada!// faltan los
-											// casos técnicos, como null//falta
-											// comparar el alfabeto
+		// Si alguno es nulo, no vale la pena seguir verificando
+		if (obj == null || this == null) 
+			// si ambos son nulos devuelve true
+			return obj == null && this == null;
+		
+		if (this.getClass() != obj.getClass()) return false;
+		
+		TrieChar<V> t2 = (TrieChar<V>) obj;
+		
+		// comparar el alfabeto
+		if(t2.alf.getClass() != this.alf.getClass()) return false;
+		
+		// COMPARACION DE CLAVES
 		boolean ret = t2.claves.size() == claves.size();
 		if (ret) {
 			for (String clavet2 : t2.claves) {
 				ret = ret && t2.obtener(clavet2).equals(obtener(clavet2));
 			}
+			ret = ret && this.raiz.equals(t2.raiz);
 		}
+
 		return ret;
+	}
+
+	public void eliminar(String clave) {
+		int i = 0;
+		Nodo<V> nodo = raiz;
+		char[] aClave = clave.toCharArray();
+		for (i = 0; i < clave.length(); i++) {
+			if (nodo == null)
+				throw new RuntimeException("No se encontro la clave");
+			nodo = nodo.hijo(alf.indice(aClave[i]));
+		}
+		if (nodo == null)
+			throw new RuntimeException("No se encontro la clave");
+
+		nodo.val = null;		
+		claves.remove(clave);
 	}
 }

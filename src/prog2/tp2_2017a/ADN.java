@@ -10,13 +10,13 @@ public class ADN implements Alfabeto<Character>{
 	@Override
 	public int indice(Character c) {
 		switch(c){
-		case 'a':
+		case 'A':
 			return Base.DatoA.getValor();
-		case 'c' :
+		case 'C' :
 			return Base.DatoC.getValor();
-		case 'g':
+		case 'G':
 			return Base.DatoG.getValor();
-		case 't' :
+		case 'T' :
 			return Base.DatoT.getValor();
 		}
 		throw new RuntimeException("digito no v�lido: " + c);
