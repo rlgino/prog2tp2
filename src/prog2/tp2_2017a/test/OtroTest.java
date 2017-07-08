@@ -1,7 +1,6 @@
 package prog2.tp2_2017a.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -29,6 +28,9 @@ public class OtroTest {
 
 		@Test
 		public void ejemploConsigna() {
+			TrieChar<String> personas3 = new TrieChar<String>(new Palabras());
+			TrieChar<String> personas4 = null;
+			assertFalse(personas3.equals(personas4));
 			personas.agregar("psicotecnico", "Gino");
 			personas.agregar("psicologo", "Pablo");
 			personas.agregar("psicofisico", "Fabian");
@@ -43,14 +45,13 @@ public class OtroTest {
 			assertTrue(busq.contains("Gino"));
 			assertTrue(busq.contains("Fabiana"));
 			
-			personas.eliminar("psicofisico");
+			personas.eliminar("psicol");
 			busq = personas.busqueda("psico");
-			assertEquals(3, busq.size());
+			assertEquals(2, busq.size());
 
 			personas2.agregar("psicotecnico", "Gino");
-			personas2.agregar("psicologico", "Martina");
+			personas2.agregar("psicofisico", "Fabian");
 			personas2.agregar("psycho", "Rosalinda");
-			personas2.agregar("psicologo", "Fabiana");
 			
 			assertTrue(personas.equals(personas2));
 		}

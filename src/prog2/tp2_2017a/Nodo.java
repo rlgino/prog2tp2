@@ -23,19 +23,21 @@ class Nodo<V> {
 	}
 
 	public boolean equals(Object o) {
-		if(this == null || o == null)
-			return this == o;
+		if(this == null || o == null) return this == o;
+		if (o.getClass() != this.getClass()) return false;
 		
-		if (o.getClass() != this.getClass()) {
-			return false;
-		}
 		Nodo<?> n = (Nodo<?>) o;
-		boolean ret = this.val == n.val;
+		
+		//Verifico valor, para que el equals no devuelva un null pointer
+		if(val == null || n.val == null) return val == n.val;
+		boolean ret = this.val.equals(n.val);
 		
 		for(int x = 0; x < hijos.length && ret ; x++){
 			//Verifico si tiene definido los hijos, para evitar un null pointer
-			if(this.hijos[x] == null || n.hijos[x] == null)
-				return (this.hijos[x] == null && n.hijos[x] == null);
+			if(this.hijos[x] == null || n.hijos[x] == null){
+				ret = ret && (this.hijos[x] == null && n.hijos[x] == null);
+				break;
+			}
 			ret = ret && this.hijos[x].equals(n.hijos[x]);
 		}
 		return ret;

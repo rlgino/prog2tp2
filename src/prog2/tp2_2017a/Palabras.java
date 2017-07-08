@@ -16,4 +16,13 @@ public class Palabras implements Alfabeto<Character>{
 		throw new RuntimeException("digito no v�lido: " + c);
 	}
 
+	@Override
+	public Character caracter(int i) {
+		int indice = i + 'a';
+		if (indice >= 'a' && indice <= 'z')
+			return (char) indice;
+
+		throw new RuntimeException("indice no v�lido: " + i);
+	}
+
 }

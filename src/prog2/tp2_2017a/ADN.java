@@ -22,4 +22,19 @@ public class ADN implements Alfabeto<Character>{
 		throw new RuntimeException("digito no v�lido: " + c);
 	}
 
+	@Override
+	public Character caracter(int i) {
+		switch(i){
+		case 0:
+			return Base.DatoA.getKey().toCharArray()[0];
+		case 1:
+			return Base.DatoC.getKey().toCharArray()[0];
+		case 2:
+			return Base.DatoG.getKey().toCharArray()[0];
+		case 3:
+			return Base.DatoT.getKey().toCharArray()[0];
+		}
+		throw new RuntimeException("indice no v�lido: " + i);
+	}
+
 }

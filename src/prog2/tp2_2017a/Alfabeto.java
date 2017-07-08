@@ -14,4 +14,12 @@ public interface Alfabeto<T>
 	 * si el s�mbolo no es v�lido.
 	 */
 	int indice(T elem);
+
+	/**
+	 * Devuelve el �ndice correspondiente a un s�mbolo.
+	 *
+	 * Debe tener complejidad O(1). Lanza RuntimeException
+	 * si el s�mbolo no es v�lido.
+	 */
+	T caracter(int i);
 }

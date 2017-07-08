@@ -117,18 +117,22 @@ public class TrieChar<V> {
 		// comparar el alfabeto
 		if(t2.alf.getClass() != this.alf.getClass()) return false;
 		
+		//Comparar si las raices son nulas
+		if(this.raiz == null || t2.raiz == null) return raiz == t2.raiz;
+		
 		// COMPARACION DE CLAVES
 		boolean ret = t2.claves.size() == claves.size();
-		if (ret) {
-			for (String clavet2 : t2.claves) {
-				ret = ret && t2.obtener(clavet2).equals(obtener(clavet2));
-			}
-			ret = ret && this.raiz.equals(t2.raiz);
-		}
+		
+		//Aca entra al equals de Nodo
+		if (ret) ret = ret && this.raiz.equals(t2.raiz);
 
 		return ret;
 	}
 
+	/**
+	 * Eliminar
+	 * @param clave a eliminar
+	 */
 	public void eliminar(String clave) {
 		int i = 0;
 		Nodo<V> nodo = raiz;
@@ -143,5 +147,20 @@ public class TrieChar<V> {
 
 		nodo.val = null;		
 		claves.remove(clave);
+		eliminar(nodo, clave);
+	}
+
+	private void eliminar(Nodo<V> nodo, String clave) {
+		if(nodo == null) return;
+		nodo.val = null;
+		for(int i = 0; i < alf.tam(); i++){
+			if(nodo.hijo(i) == null) continue;
+			if(claves.contains(clave + alf.caracter(i))){
+				System.out.println(clave + alf.caracter(i));
+				claves.remove(clave + alf.caracter(i));
+			}
+			eliminar(nodo.hijo(i), clave + alf.caracter(i));
+		}
+		
 	}
 }

@@ -15,4 +15,12 @@ public class Digitos implements Alfabeto<Character>
 
 		throw new RuntimeException("digito no v�lido: " + c);
 	}
+
+	@Override
+	public Character caracter(int i) {
+		if (i >= '0' && i <= '9')
+			return (char) (i + '0');
+
+		throw new RuntimeException("digito no v�lido: " + i);
+	}
 }
